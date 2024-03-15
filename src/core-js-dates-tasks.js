@@ -310,46 +310,8 @@ function getQuarter(date) {
  * { start: '01-01-2024', end: '10-01-2024' }, 1, 1 => ['01-01-2024', '03-01-2024', '05-01-2024', '07-01-2024', '09-01-2024']
  */
 
-function formatDateUtil(date) {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return `${day < 10 ? '0' : ''}${day}-${month < 10 ? '0' : ''}${month}-${year}`;
-}
-
-function getNextDay(date) {
-  const nextDate = new Date(date);
-  nextDate.setDate(nextDate.getDate() + 1);
-  return nextDate;
-}
-
-function getWorkSchedule(period, countWorkDays, countOffDays) {
-  const startDate = new Date(period.start);
-  const endDate = new Date(period.end);
-  const schedule = [];
-  let currentDate = startDate;
-  let isWorkingDay = true;
-
-  while (currentDate <= endDate) {
-    if (isWorkingDay) {
-      schedule.push(formatDateUtil(currentDate));
-      for (let i = 0; i < countWorkDays - 1; i += 1) {
-        currentDate = getNextDay(currentDate);
-        if (currentDate > endDate) break;
-      }
-    } else {
-      for (let i = 0; i < countOffDays - 1; i += 1) {
-        currentDate = getNextDay(currentDate);
-        if (currentDate > endDate) break;
-      }
-    }
-    if (currentDate <= endDate) {
-      isWorkingDay = !isWorkingDay;
-      currentDate = getNextDay(currentDate);
-    }
-  }
-
-  return schedule;
+function getWorkSchedule(/* period, countWorkDays, countOffDays */) {
+  throw new Error('Not implemented');
 }
 
 /**
