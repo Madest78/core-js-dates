@@ -335,14 +335,18 @@ function getWorkSchedule(period, countWorkDays, countOffDays) {
       schedule.push(formatDateUtil(currentDate));
       for (let i = 0; i < countWorkDays - 1; i += 1) {
         currentDate = getNextDay(currentDate);
+        if (currentDate > endDate) break;
       }
     } else {
       for (let i = 0; i < countOffDays - 1; i += 1) {
         currentDate = getNextDay(currentDate);
+        if (currentDate > endDate) break;
       }
     }
-    isWorkingDay = !isWorkingDay;
-    currentDate = getNextDay(currentDate);
+    if (currentDate <= endDate) {
+      isWorkingDay = !isWorkingDay;
+      currentDate = getNextDay(currentDate);
+    }
   }
 
   return schedule;
